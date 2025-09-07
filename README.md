@@ -1,8 +1,7 @@
-# DIO - Trilha .NET - API e Entity Framework
-www.dio.me
+# DIO - Desafio Agendados de Tarefas 
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de API e Entity Framework, da trilha .NET da DIO.
+Este desafio de projeto foi desenvolvido no módulo de API e Entity Framework, da trilha .NET da DIO do Bootcamp Deal Group AI Centric .NET.
+
 
 ## Contexto
 Você precisa construir um sistema gerenciador de tarefas, onde você poderá cadastrar uma lista de tarefas que permitirá organizar melhor a sua rotina.
@@ -55,4 +54,60 @@ Esse é o schema (model) de Tarefa, utilizado para passar para os métodos que e
 
 
 ## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+Este desafio foi incrível e desafiador! Pude exercitar o conhecimento adquirito neste módulo e assim firmar melhor o aprendizado! Aqui neste repositório você encontrar a solução para o desafio proposto!
+
+
+## 📋 Pré-requisitos
+Certifique-se de ter as seguintes ferramentas instaladas:
+
+- 🔹 **.NET 6.0** ou superior
+- 🔹 **IDE**: Visual Studio 2022, VS Code ou similar
+- 🔹 **Banco de Dados**: SQL server management studio; SQL Server 2022 Express
+
+
+## 🚀 Como Executar
+```bash
+# 1. Clone o repositório
+git clone https://github.com/erasmobezerra/desafio-agendador-de-tarefas.git
+
+# 2. Navegue até a pasta do projeto
+cd ./desafio-agendador-de-tarefas
+
+# 3. Tenha certeza que seu SQL Server está em execução 
+
+# 4. Restaurar os pacotes
+dotnet restore
+
+# 5. Aplicar as migrations (se necessário)
+dotnet ef database update
+
+# 6. Execute o projeto
+dotnet whatch run
+```
+
+## A API estará disponível em:
+https://localhost:7295 ou http://localhost:5181 (conforme definido no launchSettings.json)
+
+📚 Documentação da API
+Acesse o Swagger para testar os endpoints:
+https://localhost:7295/swagger ou http://localhost:5181/swagger
+
+
+
+## 📬 Contato
+<div align="left">
+
+**Erasmo Bezerra**
+
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:erasmo.ads.tech@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/erasmobezerra/)
+
+</div>
+
+---
+
+🙏 Agradeço profundamente à **Digital Innovation One** por proporcionar este aprendizado gratuito e de qualidade. Um reconhecimento especial ao professor **[Leonardo Buta](https://www.linkedin.com/in/leonardo-buta/)** pela excelente didática e orientação durante todo o processo.
+
+<div align="center">
+  <p>⭐ Se este projeto foi útil para você, considere dar uma estrela!</p>
+</div>
