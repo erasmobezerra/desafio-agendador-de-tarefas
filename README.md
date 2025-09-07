@@ -57,6 +57,15 @@ Esse é o schema (model) de Tarefa, utilizado para passar para os métodos que e
 Este desafio foi incrível e desafiador! Pude exercitar o conhecimento adquirito neste módulo e assim firmar melhor o aprendizado! Aqui neste repositório você encontrar a solução para o desafio proposto!
 
 
+## 🛠️ Tecnologias
+
+- .NET 8.0  
+- ASP.NET Core Web API  
+- Entity Framework Core  
+- SQLite (ou outro banco)  
+- Swagger UI
+
+
 ## 📋 Pré-requisitos
 Certifique-se de ter as seguintes ferramentas instaladas:
 
