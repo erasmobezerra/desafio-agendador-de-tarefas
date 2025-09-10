@@ -1,23 +1,31 @@
-### 1\. Conceito de WEB API e Principais Usos
+## 1\. Conceito de WEB API e Principais Usos
 
-#### O que é uma WEB API?
+### O que é uma WEB API?
 
-Uma **WEB API** (Application Programming Interface) é uma interface que permite que diferentes sistemas de software se comuniquem entre si através da web, utilizando o protocolo HTTP/HTTPS. Pense nela como um "garçom" em um restaurante: o cliente (uma aplicação mobile, um site, outro serviço) faz um pedido (requisição HTTP), o garçom (a API) anota o pedido e o leva para a cozinha (o servidor/banco de dados), e depois retorna com o prato pronto (a resposta, geralmente em formato JSON ou XML).
+Uma **WEB API** (Application Programming Interface) é uma interface que permite que diferentes sistemas de software se comuniquem entre si através da web, utilizando o protocolo HTTP/HTTPS.
+
+Pense nela como um "garçom" em um restaurante: o cliente (uma aplicação mobile, um site, outro serviço) faz um pedido (requisição HTTP), o garçom (a API) anota o pedido e o leva para a cozinha (o servidor/banco de dados), e depois retorna com o prato pronto (a resposta, geralmente em formato JSON ou XML).
 
 No ecossistema .NET, as WEB APIs são criadas utilizando o framework **ASP.NET Core**, que é moderno, de alta performance, multiplataforma (roda em Windows, macOS e Linux) e open-source. Com o .NET 8.0, a criação de APIs se tornou ainda mais simplificada e poderosa.
 
-#### Principais Características de uma WEB API .NET
+### Principais Características de uma WEB API .NET
 
-* **Padrão RESTful:** Geralmente, as APIs seguem os princípios REST (Representational State Transfer), que utilizam os verbos HTTP padrão de forma significativa:
-  * `GET`: Para obter dados (ex: buscar uma lista de produtos).
-  * `POST`: Para criar um novo recurso (ex: cadastrar um novo cliente).
-  * `PUT`: Para atualizar um recurso existente por completo (ex: modificar todos os dados de um produto).
-  * `PATCH`: Para atualizar parcialmente um recurso (ex: alterar apenas o preço de um produto).
-  * `DELETE`: Para remover um recurso (ex: excluir um cliente).
-* **Stateless (Sem estado):** Cada requisição feita para a API é independente e contém toda a informação necessária para ser processada. O servidor não armazena o estado do cliente entre as requisições.
+* **Padrão RESTful:** As Web APIs modernas seguem os princípios do **RESTful**, o que facilita a integração com diversos tipos de clientes — como aplicações web, mobile e dispositivos IoT — além de promover uma arquitetura **limpa, escalável e desacoplada**. O estilo REST utiliza os verbos HTTP de forma semântica e padronizada para representar operações sobre recursos:
+
+  * `GET`: Recupera dados, como uma lista de produtos ou os detalhes de um cliente.
+  * `POST`: Cria um novo recurso, por exemplo, ao cadastrar um novo cliente.
+  * `PUT`: Atualiza completamente um recurso existente, como modificar todos os dados de um produto.
+  * `DELETE`: Remove um recurso, como excluir um cliente do sistema.
+
+* **Alta segurança:** Utilizam autenticação e autorização robustas com JWT, OAuth2, entre outros.
+
 * **Focada em Dados:** O formato de dados mais comum para troca de informações é o **JSON** (JavaScript Object Notation), por ser leve, legível e de fácil interpretação por diversas linguagens de programação.
 
-#### Principais Usos
+* **Modularidade e Baixo Acoplamento:** O ASP.NET Core permite construir APIs com componentes altamente modulares. Isso significa que você pode incluir apenas os pacotes e funcionalidades que realmente precisa, o que melhora a performance, segurança e manutenção do sistema.
+
+* **Hospedagem em Nuvem:** São otimizadas para ambientes de nuvem, como Azure, AWS ou Google Cloud, com alta escalabilidade e baixo consumo de recursos.
+
+### Principais Usos
 
 1. **Aplicações SPA (Single Page Applications):** Frameworks de frontend como Angular, React e Vue.js consomem dados de uma WEB API para renderizar as telas e interagir com o usuário sem a necessidade de recarregar a página inteira.
 2. **Aplicações Mobile (iOS/Android):** Aplicativos nativos precisam de um backend para buscar e salvar dados, autenticar usuários e executar regras de negócio. A WEB API é a ponte perfeita para essa comunicação.
@@ -61,6 +69,18 @@ As **Migrations** são um recurso do Entity Framework Core para gerenciar a evol
 * **Função:** Gerar código C\# que descreve as alterações a serem feitas no banco de dados (criar tabela, adicionar coluna, remover índice, etc.). Esse código pode ser aplicado para atualizar o banco de dados de forma segura e versionada. Isso garante que a estrutura do banco de dados esteja sempre sincronizada com os seus *Models*.
 * **Processo:** Você executa um comando (`add-migration`) para gerar o arquivo de migração e outro (`update-database`) para aplicar as alterações ao banco de dados.
 
+#### e) appsettings.json - O "Painel de Controle" da sua aplicação
+
+Pense no `appsettings.json` como o **"painel de controle"** da sua aplicação em em tempo de execução. Ele contém configurações que a aplicação utiliza para funcionar, como strings de conexão com bancos de dados, chaves de APIs externas, configurações de logging, parâmetros personalizados da aplicação entre outros.
+
+A grande vantagem é que você pode alterar essas configurações sem precisar recompilar o código. Além disso, é comum ter arquivos específicos para diferentes ambientes, como `appsettings.Development.json` e `appsettings.Production.json` Esses arquivos complementam ou sobrescrevem o appsettings.json principal, dependendo do ambiente em que a aplicação está sendo executada — o que facilita a gestão de configurações entre desenvolvimento, testes e produção.
+
+#### f) `launchSettings.json` - A Configuração do seu Ambiente de Desenvolvimento
+
+O arquivo `launchSettings.json` define como o projeto deve ser iniciado durante o desenvolvimento, seja pelo Visual Studio ou via comando `doner run`. Ele especifica detalhes como perfins de esexução, URLs utilizadas pela aplicação local, e variáveis de ambiente específicas para testes.
+
+`Importante`: esse arquivo não é incluído no deploy da aplicação — ele serve exclusivamente para o ambiente de desenvolvimento local. Você o encontrará na pasta Properties do projeto.
+
 -----
 
 ### 3\. Tutorial: Criando uma API de Gerenciamento de Produtos com .NET 8.0
@@ -86,14 +106,17 @@ Isso cria um novo projeto de WEB API chamado `ApiProdutos` e navega para dentro 
 
 #### Passo 2: Instalando as Dependências (Pacotes NuGet)
 
-Vamos instalar os pacotes do Entity Framework Core para SQL Server e o Swagger (Swashbuckle), que gera uma documentação interativa da sua API.
+Vamos instalar os pacotes necessários para o projeto: 
 
 ```bash
-# Para o Entity Framework Core e o provedor do SQL Server
+# Adiciona suporte ao EF Core no projeto
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
-# Ferramenta para executar comandos do EF Core (como migrations)
-dotnet add package Microsoft.EntityFrameworkCore.Tools
+# Permitem que ferramentas como dotnet ef funcionem corretamente durante o desenvolvimento.
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+# Permite via CLI (linha de comando) aplicar migrations e interagir com o Entity Framework 
+dotnet tool install --global dotnet-ef
 
 # Para a documentação da API (Swagger/OpenAPI)
 dotnet add package Swashbuckle.AspNetCore
@@ -120,15 +143,15 @@ namespace ApiProdutos.Models
 
 #### Passo 4: Criando o Contexto do Banco de Dados
 
-Crie uma pasta chamada `Data` na raiz do projeto. Dentro dela, crie um arquivo `AppDbContext.cs`:
+Crie uma pasta chamada `Context` na raiz do projeto. Dentro dela, crie um arquivo `AppDbContext.cs`:
 
-**Data/AppDbContext.cs**
+**Context/AppDbContext.cs**
 
 ```csharp
 using ApiProdutos.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiProdutos.Data
+namespace ApiProdutos.Context
 {
     public class AppDbContext : DbContext
     {
@@ -143,14 +166,7 @@ namespace ApiProdutos.Data
 
 #### Passo 5: Configurando a Conexão com o Banco de Dados
 
- `appsettings.json`: A Configuração da sua Aplicação
-
-Pense no `appsettings.json` como o **"painel de controle" da sua aplicação em execução**. Ele contém configurações que a aplicação utiliza para funcionar, como caminhos para bancos de dados, chaves de APIs externas, configurações de logging, etc.
-
-A grande vantagem é que você pode alterar essas configurações sem precisar recompilar o código. Além disso, é comum ter arquivos específicos para diferentes ambientes, como `appsettings.Development.json` e `appsettings.Production.json`, que sobrescrevem as configurações do arquivo principal dependendo de onde a aplicação está rodando.
-
-Abra o arquivo `appsettings.json` e adicione a sua *connection string* do SQL Server.
-
+Abra o arquivo `appsettings.Development.json` e adicione a sua *connection string* do SQL Server.
 
 ```json
 {
@@ -174,7 +190,7 @@ Agora, vamos registrar o `AppDbContext` e o serviço de banco de dados no arquiv
 **Program.cs**
 
 ```csharp
-using ApiProdutos.Data;
+using ApiProdutos.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -283,7 +299,7 @@ Finalmente, vamos criar o Controller que irá expor os endpoints para manipular 
 **Controllers/ProdutosController.cs**
 
 ```csharp
-using ApiProdutos.Data;
+using ApiProdutos.Context;
 using ApiProdutos.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -353,7 +369,7 @@ namespace ApiProdutos.Controllers
                 return BadRequest(new { Erro = "O nome do produto não pode ser vazio." });
 
             produtoBanco.Nome = produto.Nome;
-            produtoBanco.Descricao = produto.Descricao;
+            produtoBanco.Estoque = produto.Estoque;
             produtoBanco.Preco = produto.Preco;
 
             _context.Produtos.Update(produtoBanco);
@@ -384,7 +400,7 @@ namespace ApiProdutos.Controllers
 Execute o projeto com o comando:
 
 ```bash
-dotnet whatch run
+dotnet watch run
 ```
 
 Conforme configurado no arquivo de configuração de ambiente launchSettings.json, ao iniciar a execução do projeto, a página do swagger será aberta automaticamente no seu navegador de internet padrão no endereço: https://localhost:7295/swagger 
@@ -398,5 +414,3 @@ Você verá a interface do Swagger, que documenta todos os endpoints que criamos
 Este tutorial cobre o ciclo completo e a arquitetura fundamental de uma WEB API .NET 8.0. A partir daqui, você pode evoluir o projeto adicionando validações, tratamento de erros mais robusto, autenticação e muito mais. Espero que tenha sido claro e útil\!
 
 ---
-
-

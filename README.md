@@ -90,18 +90,9 @@ dotnet restore
 # 5. Aplicar as migrations (se necessário)
 dotnet ef database update
 
-# 6. Execute o projeto
+# 6. Execute o projeto e a página do Swagger será aberta automaticamente no seu navegador de internet padrão no endereço: https://localhost:7295/swagger 
 dotnet whatch run
 ```
-
-## A API estará disponível em:
-https://localhost:7295 ou http://localhost:5181 (conforme definido no launchSettings.json)
-
-📚 Documentação da API
-Acesse o Swagger para testar os endpoints:
-https://localhost:7295/swagger ou http://localhost:5181/swagger
-
-
 
 ## 📬 Contato
 <div align="left">
